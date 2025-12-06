@@ -1,0 +1,17 @@
+{% extends "teacher/base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 4rem auto; text-align: center;">
+    <h2>Teacher Login</h2>
+    <p>Please sign in with your official email ID.</p>
+    <form method="POST">
+        <div class="form-group">
+            <input type="email" name="email" required placeholder="Official Email (xyz@siber.edu.in)">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" required placeholder="Password">
+        </div>
+        <button type="submit" style="width: 100%;">Sign In</button>
+    </form>
+</div>
+{% endblock %}

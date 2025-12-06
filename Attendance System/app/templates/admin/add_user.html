@@ -1,0 +1,68 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 600px; margin: 0 auto;">
+    <h2>Add New User</h2>
+    <form method="POST">
+        <div class="form-group">
+            <label for="role">Role</label>
+            <select name="role" id="role" onchange="toggleFields()" required>
+                <option value="">Select Role</option>
+                <option value="teacher">Teacher</option>
+                <option value="student">Student</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username (Login ID)</label>
+            <input type="text" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" required>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" name="name" required>
+        </div>
+
+        <div id="teacher-fields" style="display: none;">
+            <div class="form-group">
+                <label for="email">Email (Official)</label>
+                <input type="email" name="email" id="email">
+            </div>
+        </div>
+
+        <div id="student-fields" style="display: none;">
+            <div class="form-group">
+                <label for="prn">PRN</label>
+                <input type="text" name="prn" id="prn">
+            </div>
+            <div class="form-group">
+                <label for="semester">Semester</label>
+                <input type="number" name="semester" id="semester">
+            </div>
+        </div>
+
+        <button type="submit">Create User</button>
+    </form>
+</div>
+
+<script>
+    function toggleFields() {
+        const role = document.getElementById('role').value;
+        const teacherFields = document.getElementById('teacher-fields');
+        const studentFields = document.getElementById('student-fields');
+
+        teacherFields.style.display = role === 'teacher' ? 'block' : 'none';
+        studentFields.style.display = role === 'student' ? 'block' : 'none';
+
+        // Toggle required attributes
+        document.getElementById('email').required = role === 'teacher';
+        document.getElementById('prn').required = role === 'student';
+        document.getElementById('semester').required = role === 'student';
+    }
+</script>
+{% endblock %}

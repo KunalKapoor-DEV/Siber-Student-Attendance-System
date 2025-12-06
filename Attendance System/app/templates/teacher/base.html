@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Portal - CSIBER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/teacher.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <div class="logo">Teacher Portal</div>
+        <div class="nav-links">
+            {% if current_user.is_authenticated and current_user.role == 'teacher' %}
+            <a href="{{ url_for('teacher.dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('teacher.logout') }}">Logout</a>
+            {% endif %}
+        </div>
+    </nav>
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul class="flashes">
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+        {% block content %}{% endblock %}
+    </div>
+</body>
+
+</html>

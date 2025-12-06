@@ -1,0 +1,17 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 4rem auto; text-align: center;">
+    <h2>Student Login</h2>
+    <p>Please sign in with your PRN.</p>
+    <form method="POST">
+        <div class="form-group">
+            <input type="text" name="prn" required placeholder="PRN Number">
+        </div>
+        <div class="form-group">
+            <input type="password" name="password" required placeholder="Password">
+        </div>
+        <button type="submit" class="btn">Access Dashboard</button>
+    </form>
+</div>
+{% endblock %}

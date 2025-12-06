@@ -1,0 +1,25 @@
+<h3>Select Absent Students</h3>
+<p class="text-muted">Click on a student to mark them as ABSENT. Default is PRESENT.</p>
+
+<div class="attendance-grid">
+    {% for student in students %}
+    <div class="student-card" onclick="toggleAbsent(this)">
+        <input type="checkbox" name="absent_students" value="{{ student.id }}" style="display: none;">
+        <strong>{{ student.name }}</strong><br>
+        <small>{{ student.prn }}</small>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    function toggleAbsent(element) {
+        const checkbox = element.querySelector('input[type="checkbox"]');
+        checkbox.checked = !checkbox.checked;
+
+        if (checkbox.checked) {
+            element.classList.add('absent');
+        } else {
+            element.classList.remove('absent');
+        }
+    }
+</script>

@@ -1,0 +1,46 @@
+{% extends "teacher/base.html" %}
+
+{% block content %}
+<h1>Mark Attendance</h1>
+
+<div class="card">
+    <form method="POST">
+        <div class="form-group">
+            <label for="subject">Select Subject</label>
+            <select name="subject" id="subject" onchange="loadStudents()" required>
+                <option value="">-- Select Subject --</option>
+                {% for subject in subjects %}
+                <option value="{{ subject.id }}">{{ subject.name }} (Sem {{ subject.semester }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div id="student-list-container">
+            <p>Select a subject to view students.</p>
+        </div>
+
+        <button type="submit" id="submit-btn" style="display: none; margin-top: 1rem;">Submit Attendance</button>
+    </form>
+</div>
+
+<script>
+    function loadStudents() {
+        const subjectId = document.getElementById('subject').value;
+        const container = document.getElementById('student-list-container');
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (!subjectId) {
+            container.innerHTML = '<p>Select a subject to view students.</p>';
+            submitBtn.style.display = 'none';
+            return;
+        }
+
+        fetch(`/teacher/get_students/${subjectId}`)
+            .then(response => response.text())
+            .then(html => {
+                container.innerHTML = html;
+                submitBtn.style.display = 'block';
+            });
+    }
+</script>
+{% endblock %}

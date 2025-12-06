@@ -1,0 +1,29 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<h1>Admin Dashboard</h1>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+    <div class="card">
+        <h3>Total Teachers</h3>
+        <p style="font-size: 2rem; font-weight: bold;">{{ teacher_count }}</p>
+        <a href="{{ url_for('admin.add_user') }}" class="btn">Add Teacher</a>
+    </div>
+    <div class="card">
+        <h3>Total Students</h3>
+        <p style="font-size: 2rem; font-weight: bold;">{{ student_count }}</p>
+        <a href="{{ url_for('admin.add_user') }}" class="btn">Add Student</a>
+    </div>
+    <div class="card">
+        <h3>Total Subjects</h3>
+        <p style="font-size: 2rem; font-weight: bold;">{{ subject_count }}</p>
+        <a href="{{ url_for('admin.add_subject') }}" class="btn">Add Subject</a>
+    </div>
+</div>
+
+<div class="card">
+    <h2>System Management</h2>
+    <p>Manage the entire attendance system from here.</p>
+    <!-- Add more management links here later -->
+</div>
+{% endblock %}

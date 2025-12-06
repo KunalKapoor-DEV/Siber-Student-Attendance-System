@@ -1,0 +1,41 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+<h1>Hello, {{ student.name }}</h1>
+
+{% if overall_percentage < 75 %} <div class="warning-banner">
+    Your attendance is below 75%!
+    <br>
+    <small>You need to attend {{ lectures_needed }} more consecutive lectures to reach 75%.</small>
+    </div>
+    {% endif %}
+
+    <div class="card" style="text-align: center;">
+        <h3>Overall Attendance</h3>
+        <div class="stat-circle"
+            style="background: conic-gradient(var(--primary-color) {{ overall_percentage }}%, #ddd {{ overall_percentage }}%);">
+            <span>{{ overall_percentage }}%</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h3>Subject-wise Breakdown</h3>
+        <ul class="subject-list">
+            {% for subject, stats in subject_stats.items() %}
+            <li class="subject-item">
+                <span>{{ subject }}</span>
+                <span
+                    style="font-weight: bold; color: {% if stats.percentage < 75 %}var(--warning-color){% else %}var(--accent-color){% endif %};">
+                    {{ stats.percentage }}%
+                </span>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Profile Details</h3>
+        <p><strong>PRN:</strong> {{ student.prn }}</p>
+        <p><strong>Semester:</strong> {{ student.semester }}</p>
+    </div>
+    {% endblock %}

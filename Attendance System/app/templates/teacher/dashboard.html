@@ -1,0 +1,36 @@
+{% extends "teacher/base.html" %}
+
+{% block content %}
+<h1>Welcome, {{ teacher.name }}</h1>
+
+<div class="card">
+    <h2>Quick Actions</h2>
+    <a href="{{ url_for('teacher.mark_attendance') }}" class="btn">Mark Attendance</a>
+</div>
+
+<div class="card">
+    <h2>Recent Sessions</h2>
+    {% if recent_sessions %}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Subject</th>
+                <th>Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for session in recent_sessions %}
+            <tr>
+                <td>{{ session.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ session.subject.name }}</td>
+                <td>{{ session.created_at.strftime('%H:%M') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No attendance sessions recorded yet.</p>
+    {% endif %}
+</div>
+{% endblock %}
